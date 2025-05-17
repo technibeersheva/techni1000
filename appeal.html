@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>ערעור</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h2>שליחת ערעור</h2></header>
+    <main>
+        <h2>טופס ערעור לבית הספר</h2>
+        <form id="appeal-form" action="#" method="post">
+            <label>שם מלא:<br><input type="text" name="full_name" required></label><br><br>
+            <label>נושא הערעור:<br><input type="text" name="subject" required></label><br><br>
+            <label>תוכן הערעור:<br><textarea name="content" rows="5" required></textarea></label><br><br>
+            <input type="submit" value="שלח ערעור">
+        </form>
+    </main>
+    <footer>&copy; 2025 הטכני באר שבע</footer>
+
+    <script>
+        const appealScriptURL = 'https://script.google.com/macros/s/AKfycbyqAccAuS5Dj6zLKhjXSVa5OHRbi296e5ViRwELpYEgp0_lGG5O-WN6mUUJDplEkdw-/exec';
+        const form = document.getElementById('appeal-form');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            fetch(appealScriptURL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => {
+                window.location.href = 'appeal_submitted.html';
+            })
+            .catch(error => {
+                alert("אירעה שגיאה בשליחת הערעור. נסה שוב.");
+                console.error('Error!', error.message);
+            });
+        });
+    </script>
+</body>
+</html>
